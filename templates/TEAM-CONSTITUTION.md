@@ -8,7 +8,7 @@ This file is your constitution: one part of a harness, the part that says what
 always holds and what you learned the hard way.
 
 Score without the constitution: 4 / 7
-Score with the constitution:    6 / 7
+Score with the constitution:    7 / 7
 Traps that flipped and why (one line):
 
 ---
