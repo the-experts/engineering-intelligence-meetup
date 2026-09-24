@@ -7,7 +7,7 @@ during the breakout, load it as your assistant's rules file for run 2 of
 This file is your constitution: one part of a harness, the part that says what
 always holds and what you learned the hard way.
 
-Score without the constitution: _ / 7
+Score without the constitution: 4 / 7
 Score with the constitution:    _ / 7
 Traps that flipped and why (one line):
 
