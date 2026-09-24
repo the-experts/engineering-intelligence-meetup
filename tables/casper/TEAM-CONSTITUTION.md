@@ -66,14 +66,20 @@ what always holds and what was learned the hard way. Write the rules your
 assistant should follow on this codebase. This is the part that gets loaded for the "with harness" run.
 Short imperative rules with an origin note work best, for example:
 
-- Do not merge a pull request with functional changes until at least one human has reviewed it. Non-functional changes, such as version bumps, documentation, or simple text changes, may be merged without review.
-- If your only pull request review comment is `LGTM`, include a 🚀 emoji.
+- Do not merge an MR/PR with functional changes until at least one human has reviewed it. An MR and a PR mean the same review artifact in this constitution. Functional changes alter runtime behavior, APIs, data schemas, migrations, configuration behavior, or production logic. Non-functional changes, such as version bumps, documentation, or simple text changes, may be merged without review.
+- If your only MR/PR review comment is `LGTM`, include a 🚀 emoji.
 - Before introducing a dependency or new tooling, check whether the existing tools can meet the need. Add a dependency only when needed, and follow existing project structures and coding conventions. _Origin: New tooling did not fit the existing infrastructure and had to be redone, a few weeks ago._
 - Write code identifiers, comments, and in-repo documentation in English. Preserve Dutch domain-specific terms rather than translating them; for example, use `sluis` and its `name`, not `sluice` or `naam`. _Origin: A change mixed Dutch comments with English identifiers and translated domain terminology, last month._
 - Record significant architecture decisions as numbered ADRs in `decisions/adr/`.
 - Use the ADR format defined below for each decision record.
-- Before changing code, always read the relevant decisions, standards, and runbooks in `../flowmetrics-wiki`. Respect each document's `status` header and follow the applicable guidance.
-- Before submitting or updating a merge request, always run Prettier on the changed files and ensure they use Unix LF line endings, never CRLF.
+- Before planning or implementing code changes, always read the relevant decisions, standards, and runbooks in `../flowmetrics-wiki`. Respect each document's `status` header and follow the applicable guidance. If the wiki is unavailable, stop, notify the user, and ask for permission to continue.
+- Before submitting or updating an MR/PR, run `prettier '**/*' --write --ignore-unknown --list-different`. If the repository needs project-specific exclusions or settings, suggest adding `.prettierignore` and `.prettierrc` files.
+- Enforce Unix LF line endings through repository configuration, such as `.gitattributes`, and never commit CRLF line endings.
+- Before merging an MR/PR, run the project's relevant automated checks, including tests, builds, linting, and type checks where they exist.
+- Report the validation commands that were run and their results in the MR/PR or final handoff. Report skipped checks and the reason they were skipped.
+- Do not commit secrets or expose credentials, tokens, private keys, or other sensitive data. Read and follow the project's security guidance before handling credentials, permissions, or sensitive data.
+- Preserve unrelated user changes and avoid broad refactors unless they are necessary for the requested work.
+- Update relevant documentation when a change affects public behavior, setup, configuration, or developer workflows.
 
 ### ADR format
 
@@ -108,7 +114,3 @@ Accepted
 
 <decision, rationale, and consequences>
 ```
-
-The team's decisions, standards, and runbooks live in `../flowmetrics-wiki`.
-Before changing code, the assistant must read the relevant material there and
-respect its `status` header.
