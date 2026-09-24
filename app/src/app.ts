@@ -7,6 +7,7 @@ import { Metrics } from './lib/metrics.ts';
 import { billingRoutes } from './routes/billing.ts';
 import { healthRoutes } from './routes/health.ts';
 import { metricsRoutes } from './routes/metrics.ts';
+import { requireInternalToken } from './routes/internal-auth.ts';
 
 export interface AppDeps {
   fetchImpl?: typeof fetch;
@@ -26,7 +27,7 @@ export function createApp(deps: AppDeps = {}) {
   const app = express();
   app.use(express.json());
   app.use(healthRoutes());
-  app.use(metricsRoutes(metrics));
+  app.use('/internal', requireInternalToken(), metricsRoutes(metrics));
   app.use('/billing', billingRoutes(billing));
   return app;
 }

@@ -2,8 +2,12 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createApp } from '../src/app.ts';
 import { Metrics } from '../src/lib/metrics.ts';
+import { clearSecretCache } from '../src/lib/secrets.ts';
 
 process.env.PAYMENT_API_KEY = 'test-key';
+process.env.INTERNAL_TOKEN = 'test-internal-token';
+
+const internalHeaders = { 'x-internal-token': 'test-internal-token' };
 
 test('renders counters in Prometheus text format (ADR-008)', () => {
   const metrics = new Metrics();
@@ -49,13 +53,13 @@ function startRun(base: string, tenantId: string) {
   });
 }
 
-test('GET /metrics counts billing runs and payment retries without tenant ids', async () => {
+test('GET /internal/metrics counts billing runs and payment retries without tenant ids', async () => {
   const app = createApp({ fetchImpl: fakeProvider([503, 200, 400]), sleep: async () => {} });
   await withServer(app, async (base) => {
     assert.equal((await startRun(base, 't1')).status, 202);
     assert.equal((await startRun(base, 't2')).status, 502);
 
-    const res = await fetch(`${base}/metrics`);
+    const res = await fetch(`${base}/internal/metrics`, { headers: internalHeaders });
     assert.equal(res.status, 200);
     assert.match(res.headers.get('content-type') ?? '', /^text\/plain/);
     const text = await res.text();
@@ -74,4 +78,36 @@ test('a charge the provider reports as failed counts as a failed run', async () 
     assert.equal((await startRun(base, 't1')).status, 202);
   });
   assert.match(metrics.renderPrometheus(), /^billing_runs_total\{status="failed"\} 1$/m);
+});
+
+test('GET /internal/metrics rejects a missing or wrong internal token', async () => {
+  await withServer(createApp(), async (base) => {
+    const missing = await fetch(`${base}/internal/metrics`);
+    assert.equal(missing.status, 401);
+    const wrong = await fetch(`${base}/internal/metrics`, { headers: { 'x-internal-token': 'guess' } });
+    assert.equal(wrong.status, 401);
+    assert.doesNotMatch(await wrong.text(), /billing_runs_total|test-internal-token/);
+  });
+});
+
+test('metrics are no longer served on the public /metrics path', async () => {
+  await withServer(createApp(), async (base) => {
+    const res = await fetch(`${base}/metrics`, { headers: internalHeaders });
+    assert.equal(res.status, 404);
+  });
+});
+
+test('internal endpoints fail closed when INTERNAL_TOKEN is not configured', async () => {
+  const saved = process.env.INTERNAL_TOKEN;
+  delete process.env.INTERNAL_TOKEN;
+  clearSecretCache();
+  try {
+    await withServer(createApp(), async (base) => {
+      const res = await fetch(`${base}/internal/metrics`, { headers: { 'x-internal-token': '' } });
+      assert.equal(res.status, 503);
+    });
+  } finally {
+    process.env.INTERNAL_TOKEN = saved;
+    clearSecretCache();
+  }
 });
