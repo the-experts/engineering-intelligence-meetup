@@ -1,8 +1,8 @@
 # Team constitution: table koffie
 
 Score without the constitution: 4 / 7
-Score with the constitution:    _ / 7
-Traps that flipped and why (one line):
+Score with the constitution:    6 / 7
+Traps that flipped and why (one line): 1-6 flipped because the constitution sends the assistant to the wiki and ranks current over stale; 7 stayed red because the announced endpoint rule was written down nowhere.
 
 ---
 
@@ -42,6 +42,7 @@ Traps that flipped and why (one line):
 ## 4. The one thing you would put in place next week
 
 - Connect the Confluence/Jira MCP, so the assistant reads the ADRs and the ticket before it writes code.
+- No verbal-only rules: a rule announced in a meeting, stand-up or on a slide doesn't count until it's in this constitution or an ADR, with an origin line. Whoever announces it writes it down the same day.
 
 ---
 
@@ -65,7 +66,9 @@ Traps that flipped and why (one line):
 - Before building on a dependency, check its support status and the ADRs. If it is end-of-life, upgrade it or record an exception. Never do neither. (Origin: run 1, express 4.17.1 left untouched.)
 - Never expose operational endpoints (metrics, debug, admin) unauthenticated on the public root path. Check the docs for how internal endpoints are protected. (Origin: run 1, `/metrics` open on `/`.)
 - Never invent policy values (retry counts, delays, timeouts, limits) that a document could define. Look them up, or say in the summary that none exists. (Origin: run 1 made up the retry policy.)
-- <TODO table: the rule announced tonight that is written down nowhere>
+- Operational endpoints (metrics, health details, debug, admin) live under `/internal/...`, e.g. `GET /internal/metrics`, and require the `X-Internal-Token` header, checked in constant time against `getSecret('INTERNAL_TOKEN')`. A missing or wrong token gets 401. This path overrides the bare `/metrics` path in ADR-008; the Prometheus format and naming in ADR-008 still apply. (Origin: run 2, `/metrics` behind a self-invented `METRICS_TOKEN` bearer scheme, because this rule was announced and never written down.)
+- Never invent a security mechanism: auth scheme, header name, secret name, protected path or port. If no document defines it, stop and ask before building it, and don't pick a plausible default. The same goes for anything a reviewer would hold you to that you can't find written down. (Origin: run 2 invented one and scored FAIL.)
+- Before every commit, check that `git branch --show-current` is still the branch the task started on. If it changed, stop and ask; never commit onto whatever happens to be checked out. (Origin: run 2 landed on `table-koffie` instead of `run-with` after a mid-task switch.)
 
 ### Knowledge sources: read before changing code
 - Our decisions, standards and runbooks live in `../flowmetrics-wiki`. Read the relevant ones before you change code, and respect their `status` header. An accepted or current document beats a superseded, deprecated or draft one, and beats existing code.
