@@ -3,6 +3,7 @@
 Score without the constitution: 4 / 7
 Score with the constitution:    6 / 7
 Traps that flipped and why (one line): 5 and 6 flipped because the constitution sends the assistant to the wiki and ranks current over stale; 7 stayed red because the announced endpoint rule was written down nowhere.
+Run 3 (after writing the slide's rule down): 7 / 7, trap 7 flipped. Run 3 reused run 2's code and only changed the endpoint, so it is not a fresh-session run.
 
 ---
 
