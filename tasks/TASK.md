@@ -91,9 +91,9 @@ Between the two runs you write the rules. This is the part that decides the
 second score.
 
 ```bash
-git switch -c table-<name> main
-mkdir -p tables/<name>
-cp templates/TEAM-CONSTITUTION.md tables/<name>/TEAM-CONSTITUTION.md
+git switch -c table-builders main
+mkdir -p tables/builders
+cp templates/TEAM-CONSTITUTION.md tables/builders/TEAM-CONSTITUTION.md
 ```
 
 Fill it in as a table. It is about **your** team: your incidents, your

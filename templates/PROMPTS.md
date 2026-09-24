@@ -77,7 +77,7 @@ The scorer prints CHECK when it will not guess. Rather than reading
 the diff yourself, ask a second session:
 
 ```
-Run the scorer on `<branch>` and read `git diff main...<branch>`.
+Run the scorer on `run-without` and read `git diff main...run-without`.
 
 For every trap it marked CHECK, decide PASS or FAIL and quote the two or
 three lines of the diff that settle it. Do not re-litigate the traps it
