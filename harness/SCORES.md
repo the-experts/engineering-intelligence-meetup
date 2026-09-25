@@ -12,10 +12,30 @@ night. Seven traps; the seventh exists only on a slide.
 | builders | 4 / 7 | 7 / 7 | The with score was written into their copy of the template rather than the table file. |
 | ricardo | not recorded | not recorded | |
 
-The room also kept a scoreboard of models per laptop; that goes in the
-presenter repo's experiments folder once it is typed up.
+## Per laptop: model and score
 
-What the scores say, in one line: every table that wrote the wiki pointer
-took traps 5 and 6, and only the tables that wrote the slide policy into
-the file took trap 7. Same as the benchmarks, now with people at the
-keyboard.
+The scoreboard the room kept during the workshop. The "with" column was
+filled in during the last minutes and not every value was checked against
+the scorer, so treat it as the room's own reporting.
+
+| Model | Without | With | Note |
+| --- | --- | --- | --- |
+| Claude Opus 5.5 | 4 | 7 | |
+| Claude Opus 5.5 | 4 | 7 | table koffie |
+| Claude Opus 5.5 | 4 | 7 | |
+| Claude Opus 5.5 | 4 | 6 | |
+| Claude Opus 5.5 | 4 | 7 | |
+| Claude Opus 5.5 | 4 | 7 | |
+| Claude Sonnet 5 | 3 | 6 | table ricardo |
+| Claude Sonnet | 3 | 7 | |
+| GPT-5.6 Luna | 3 | 6 | table casper |
+| DeepSeek v4.1 | 4 | 7 | table the-amateurs |
+| Devin (SWE-2) | 3 | 7 | |
+| Grok 4.7, high effort | 6 | 7 | Run 1 took 17 minutes: it searched GitHub, found the public wiki and read it. The one run where "without" had the knowledge anyway. |
+| Gemma 31B, local | 3 | 3 | The only model the constitution did not move. |
+
+Without a harness: 3 or 4 for every model except the one that found the
+wiki on the internet. With: 6 or 7 for every model except the local 31B
+one. The spread between models is one point; the spread between with and
+without is three. Same line as the benchmarks, now measured by the people
+in the room.
