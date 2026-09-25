@@ -1,5 +1,17 @@
 # Engineering Intelligence: the meetup starter kit
 
+> **Thank you.** To everyone who was at the meetup on 24 September 2026:
+> thank you for the evening. Thirteen laptops, thirteen assistants from six
+> vendors, six table constitutions, and every one of them moved the score.
+> What the room built is now in this repo for everyone:
+>
+> - **The slides**, as a PDF on the [`slides-2026-09-24` release](https://github.com/the-experts/engineering-intelligence-meetup/releases/tag/slides-2026-09-24).
+> - **Your table's constitution** under `tables/`.
+> - **All six merged** into one loadable constitution under `harness/`, with
+>   identifiers, origins, the conflicts and the scores.
+>
+> Keep it growing: a pull request with a rule and its origin is all it takes.
+
 Material for the the/experts meetup "Engineering Intelligence. The next
 skill in software engineering" (24 September 2026). Everything in this repo
 is fictional: FlowMetrics is a made-up 40-person dev shop that bills API
@@ -31,27 +43,6 @@ Why TypeScript: the meetup is language-agnostic and the interesting part is
 the harness, not the app. TypeScript on a recent Node runs without a build
 step, which keeps setup at "clone, npm install, go". A Java or Kotlin port is
 welcome as a pull request.
-
-## Thank you
-
-To everyone who was at the meetup on 24 September 2026: thank you for the
-evening. Thirteen laptops, thirteen assistants from six vendors, six table
-constitutions, and every one of them moved the score. What the room built
-is now in this repo for everyone:
-
-- the slides, as a PDF on the [`slides-2026-09-24` release](https://github.com/the-experts/engineering-intelligence-meetup/releases/tag/slides-2026-09-24);
-- your table's constitution under `tables/`;
-- all six merged into one loadable constitution under `harness/`, with
-  identifiers, origins, the conflicts and the scores.
-
-Keep it growing: a pull request with a rule and its origin is all it takes.
-
-## The slides and the combined harness
-
-The talk's slides are attached to the [`slides-2026-09-24` release](https://github.com/the-experts/engineering-intelligence-meetup/releases/tag/slides-2026-09-24)
-as a PDF. The six table constitutions are under `tables/`, and `harness/`
-holds them merged into one loadable constitution, with the conflicts and
-the scores.
 
 ## Before the evening
 
