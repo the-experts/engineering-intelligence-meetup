@@ -32,6 +32,13 @@ the harness, not the app. TypeScript on a recent Node runs without a build
 step, which keeps setup at "clone, npm install, go". A Java or Kotlin port is
 welcome as a pull request.
 
+## The slides and the combined harness
+
+The talk's slides are attached to the [`slides-2026-09-24` release](https://github.com/the-experts/engineering-intelligence-meetup/releases/tag/slides-2026-09-24)
+as a PDF. The six table constitutions are under `tables/`, and `harness/`
+holds them merged into one loadable constitution, with the conflicts and
+the scores.
+
 ## Before the evening
 
 You need: a laptop, git, a GitHub account (for push access to this repo),
